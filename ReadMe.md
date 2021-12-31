@@ -16,6 +16,6 @@ RxSwift + MVVM을 공부함과 동시에 건강을 챙기기 위해 나를 위�
              -> 목적지 입력 직후 실시간으로 경로를 표기
              -> 목적지 입력 직후 거리/소요시간이 계산됨
          ii. 하단의 OK Button 선택 시 시간 측정 View로 전환
-<img src = "https://github.com/chalie00/MyBicycle/tree/init/Image/playtab.png">
+<img src = "https://github.com/chalie00/MyBicycle/blob/init/Image/playtab.png">
 
 
