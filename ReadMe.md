@@ -17,5 +17,29 @@ RxSwift + MVVM을 공부함과 동시에 건강을 챙기기 위해 나를 위�
              -> 목적지 입력 직후 거리/소요시간이 계산됨
          ii. 하단의 OK Button 선택 시 시간 측정 View로 전환
 <img src = "https://github.com/chalie00/MyBicycle/blob/init/Image/playtab.png">
+</br>
 
+     2-2. Record Tab
+         i.Tableview에 Date, Distance, Time(걸린시간)으로 Record Data 관리
+             -> Date, Distance, Time를 선택 시 Sort 기능 추가
+         ii. Search 시 실시간으로 결과가 출력
+<img src = "https://github.com/chalie00/MyBicycle/blob/init/Image/recordtab.png">
+</br>
 
+     2-3. TimeVC</br>
+         i. StartTime, PauseTime로 실제 자전거 주행 시 Start/Stop 기능
+            -> Pause가 선택되기 전까지 StartTime Button 비활성화 (Pause 동일)
+         ii. 자전거 주행 시 Hour, Min, Minute 가 실시간으로 표기
+         iii. complete 선택 시 dismiss되며, Play Tab으로 이동
+            -> dismiss 후 Record Tab 선택 시 현재 Data 갱신
+<img src = "https://github.com/chalie00/MyBicycle/blob/init/Image/timevc.png">
+
+## 3. RxSwift 구현이 예상되는 부분
+     3-1. Play Tab
+          i. 출발지/목적이 입력에 따른 지도, 거리, 소요 시간 갱신
+     3-2. Record Tab
+          i. Search 시 typing된 input에 따른 TableView 갱신
+     3-3. TimeVC
+          i. TBD
+
+ 
