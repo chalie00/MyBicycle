@@ -16,7 +16,7 @@
 		21F9DD66277D4D9200386763 /* MyBiCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F9DD65277D4D9200386763 /* MyBiCycleTests.swift */; };
 		21F9DD71277D4D9200386763 /* MyBiCycleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F9DD70277D4D9200386763 /* MyBiCycleUITests.swift */; };
 		21FBD0092782F60D00CF59DA /* BicycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBD0082782F60D00CF59DA /* BicycleModel.swift */; };
-		21FBD00B2782F62100CF59DA /* BicycleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBD00A2782F62100CF59DA /* BicycleViewModel.swift */; };
+		21FBD00D2782F73000CF59DA /* BicycleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBD00C2782F73000CF59DA /* BicycleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		21F9DD70277D4D9200386763 /* MyBiCycleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBiCycleUITests.swift; sourceTree = "<group>"; };
 		21F9DD72277D4D9200386763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21FBD0082782F60D00CF59DA /* BicycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicycleModel.swift; sourceTree = "<group>"; };
-		21FBD00A2782F62100CF59DA /* BicycleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BicycleViewModel.swift; path = MyBiCycle/Model/BicycleViewModel.swift; sourceTree = SOURCE_ROOT; };
+		21FBD00C2782F73000CF59DA /* BicycleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicycleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +136,7 @@
 		21FBD0032782F45800CF59DA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				21FBD00A2782F62100CF59DA /* BicycleViewModel.swift */,
+				21FBD00C2782F73000CF59DA /* BicycleViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 			files = (
 				217A26872782F29B00322C5E /* ViewController.swift in Sources */,
 				21FBD0092782F60D00CF59DA /* BicycleModel.swift in Sources */,
-				21FBD00B2782F62100CF59DA /* BicycleViewModel.swift in Sources */,
+				21FBD00D2782F73000CF59DA /* BicycleViewModel.swift in Sources */,
 				21F9DD4F277D4D8F00386763 /* AppDelegate.swift in Sources */,
 				21F9DD51277D4D8F00386763 /* SceneDelegate.swift in Sources */,
 			);
