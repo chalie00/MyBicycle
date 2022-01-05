@@ -6,16 +6,28 @@
 //
 
 import UIKit
+import MapKit
 
-class ViewController: UIViewController {
+class PlayBicycleVC: UIViewController {
 
+    @IBOutlet weak var startTxtFld: UITextField!
+    @IBOutlet weak var endTxtFld: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
+    
+    
+    @IBOutlet weak var disLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func pressedStartBtn(_ sender: UIButton) {
+        print("Start Button Pressed")
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -26,4 +38,5 @@ class ViewController: UIViewController {
     }
     */
 
-}
+} //End Of The Class
+

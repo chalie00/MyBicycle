@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		217A26872782F29B00322C5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A26862782F29B00322C5E /* ViewController.swift */; };
+		217A26872782F29B00322C5E /* PlayBicycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A26862782F29B00322C5E /* PlayBicycleVC.swift */; };
 		21F9DD4F277D4D8F00386763 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F9DD4E277D4D8F00386763 /* AppDelegate.swift */; };
 		21F9DD51277D4D8F00386763 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F9DD50277D4D8F00386763 /* SceneDelegate.swift */; };
 		21F9DD56277D4D8F00386763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F9DD54277D4D8F00386763 /* Main.storyboard */; };
@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		217A26862782F29B00322C5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		217A26862782F29B00322C5E /* PlayBicycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBicycleVC.swift; sourceTree = "<group>"; };
 		21F9DD4B277D4D8F00386763 /* MyBiCycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBiCycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F9DD4E277D4D8F00386763 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21F9DD50277D4D8F00386763 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		21FBD0072782F48000CF59DA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				217A26862782F29B00322C5E /* ViewController.swift */,
+				217A26862782F29B00322C5E /* PlayBicycleVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -304,7 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				217A26872782F29B00322C5E /* ViewController.swift in Sources */,
+				217A26872782F29B00322C5E /* PlayBicycleVC.swift in Sources */,
 				21FBD0092782F60D00CF59DA /* BicycleModel.swift in Sources */,
 				21FBD00D2782F73000CF59DA /* BicycleViewModel.swift in Sources */,
 				21F9DD4F277D4D8F00386763 /* AppDelegate.swift in Sources */,

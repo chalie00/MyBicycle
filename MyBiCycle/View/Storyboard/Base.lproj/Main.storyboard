@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TSN-RB-xbc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TSN-RB-xbc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--View Controller-->
         <scene sceneID="D8J-mB-lED">
             <objects>
                 <viewController id="AxW-Zf-EwD" sceneMemberID="viewController">
@@ -56,13 +57,13 @@
                             <constraint firstItem="rGb-4i-AgN" firstAttribute="trailing" secondItem="rOJ-uw-j9J" secondAttribute="trailing" constant="10" id="uTJ-il-naI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="kMK-5R-Ew8"/>
+                    <tabBarItem key="tabBarItem" selectedImage="record.circle" catalog="system" id="kMK-5R-Ew8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7h-S8-Wai" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1230.4347826086957" y="292.63392857142856"/>
         </scene>
-        <!--Item 1-->
+        <!--Play BicycleVC-->
         <scene sceneID="CGj-LS-pDh">
             <objects>
                 <viewController id="SeZ-Ej-YnU" customClass="PlayBicycleVC" customModule="MyBiCycle" customModuleProvider="target" sceneMemberID="viewController">
@@ -125,7 +126,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Hx9-dd-i39"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="pressedStartBtn:" destination="SeZ-Ej-YnU" eventType="touchUpInside" id="U3o-oQ-ABx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PG5-yO-vZq"/>
@@ -148,7 +153,14 @@
                             <constraint firstItem="6ZU-Ky-bOs" firstAttribute="leading" secondItem="PG5-yO-vZq" secondAttribute="leading" constant="20" id="zuI-CK-wya"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="1de-OO-SUh"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="1de-OO-SUh"/>
+                    <connections>
+                        <outlet property="disLbl" destination="4wp-8H-FQa" id="XV9-nk-xx3"/>
+                        <outlet property="endTxtFld" destination="rnS-gL-IgW" id="mlF-wP-ZXe"/>
+                        <outlet property="mapView" destination="mSH-Cs-uP5" id="PnH-hh-Urp"/>
+                        <outlet property="startTxtFld" destination="hGs-gP-WyL" id="hFh-I8-xa2"/>
+                        <outlet property="timeLbl" destination="JBp-ZS-tYU" id="d0Y-GJ-mZt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bh0-H0-HIc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,6 +277,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="record.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
