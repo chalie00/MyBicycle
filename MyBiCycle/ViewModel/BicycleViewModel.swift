@@ -30,6 +30,43 @@ class PlayBicycleVM {
         mapview.setRegion(region, animated: true)
     }
     
+    //get the longtitude ans latitude from address String
+    func getcoordinateFromAddress(_ getAddress: String, mapview: MKMapView) {
+        var resultLatitude: CLLocationDegrees!
+        var resultLongtitude: CLLocationDegrees!
+        
+        CLGeocoder().geocodeAddressString(getAddress) {
+            placeMarks, error in
+            if let lat = placeMarks?.first?.location?.coordinate.latitude {
+                print("lattitude: \(lat)")
+                resultLatitude = lat
+            }
+            
+            if let lon = placeMarks?.first?.location?.coordinate.longitude {
+                print("longtitude: \(lon)")
+                resultLongtitude = lon
+            }
+            
+            if (resultLatitude != nil && resultLongtitude != nil) {
+                let coordinate = CLLocationCoordinate2DMake(resultLatitude, resultLongtitude)
+                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                let region = MKCoordinateRegion(center: coordinate, span: span)
+                mapview.region = region
+                
+                //Mark the location obtained from the address as a pin on the map
+                let pin = MKPointAnnotation()
+                pin.title = "\(getAddress)"
+                pin.subtitle = "SubTitle"
+                pin.coordinate = coordinate
+                mapview.addAnnotation(pin)
+                
+            }
+            
+            
+        }
+    }
+    
+    
     
 }//End Of The Class
 

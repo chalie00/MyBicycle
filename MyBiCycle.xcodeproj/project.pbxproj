@@ -17,6 +17,7 @@
 		21F9DD71277D4D9200386763 /* MyBiCycleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F9DD70277D4D9200386763 /* MyBiCycleUITests.swift */; };
 		21FBD0092782F60D00CF59DA /* BicycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBD0082782F60D00CF59DA /* BicycleModel.swift */; };
 		21FBD00D2782F73000CF59DA /* BicycleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBD00C2782F73000CF59DA /* BicycleViewModel.swift */; };
+		7B935F2AEB4753E0F886DA5C /* libPods-MyBiCycle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A95D94A03BB9A4D587685F9 /* libPods-MyBiCycle.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A95D94A03BB9A4D587685F9 /* libPods-MyBiCycle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyBiCycle.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		217A26862782F29B00322C5E /* PlayBicycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBicycleVC.swift; sourceTree = "<group>"; };
 		21F9DD4B277D4D8F00386763 /* MyBiCycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBiCycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F9DD4E277D4D8F00386763 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,8 @@
 		21F9DD72277D4D9200386763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21FBD0082782F60D00CF59DA /* BicycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicycleModel.swift; sourceTree = "<group>"; };
 		21FBD00C2782F73000CF59DA /* BicycleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicycleViewModel.swift; sourceTree = "<group>"; };
+		2ED57F110E75AD1D11A24EE8 /* Pods-MyBiCycle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBiCycle.debug.xcconfig"; path = "Target Support Files/Pods-MyBiCycle/Pods-MyBiCycle.debug.xcconfig"; sourceTree = "<group>"; };
+		FCD74795793A05DD9B3D5D7E /* Pods-MyBiCycle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBiCycle.release.xcconfig"; path = "Target Support Files/Pods-MyBiCycle/Pods-MyBiCycle.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B935F2AEB4753E0F886DA5C /* libPods-MyBiCycle.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1934CAF8A17E18D5E377C602 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A95D94A03BB9A4D587685F9 /* libPods-MyBiCycle.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		21F9DD42277D4D8F00386763 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +100,8 @@
 				21F9DD64277D4D9200386763 /* MyBiCycleTests */,
 				21F9DD6F277D4D9200386763 /* MyBiCycleUITests */,
 				21F9DD4C277D4D8F00386763 /* Products */,
+				6182CB401642A8C7EE3E866B /* Pods */,
+				1934CAF8A17E18D5E377C602 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +189,16 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		6182CB401642A8C7EE3E866B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2ED57F110E75AD1D11A24EE8 /* Pods-MyBiCycle.debug.xcconfig */,
+				FCD74795793A05DD9B3D5D7E /* Pods-MyBiCycle.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -181,6 +206,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21F9DD75277D4D9200386763 /* Build configuration list for PBXNativeTarget "MyBiCycle" */;
 			buildPhases = (
+				B9BC3A09424349479E8C020F /* [CP] Check Pods Manifest.lock */,
 				21F9DD47277D4D8F00386763 /* Sources */,
 				21F9DD48277D4D8F00386763 /* Frameworks */,
 				21F9DD49277D4D8F00386763 /* Resources */,
@@ -298,6 +324,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B9BC3A09424349479E8C020F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyBiCycle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		21F9DD47277D4D8F00386763 /* Sources */ = {
@@ -481,6 +532,7 @@
 		};
 		21F9DD76277D4D9200386763 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ED57F110E75AD1D11A24EE8 /* Pods-MyBiCycle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -500,6 +552,7 @@
 		};
 		21F9DD77277D4D9200386763 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCD74795793A05DD9B3D5D7E /* Pods-MyBiCycle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

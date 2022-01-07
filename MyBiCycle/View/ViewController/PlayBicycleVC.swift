@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import RxSwift
 
 class PlayBicycleVC: UIViewController {
 
@@ -33,7 +34,12 @@ class PlayBicycleVC: UIViewController {
     
     @IBAction func pressedStartBtn(_ sender: UIButton) {
         print("Start Button Pressed")
+        //Test Code
+        if startTxtFld.text != nil {
+            viewModel.getcoordinateFromAddress(startTxtFld.text!, mapview: mapView)
+        }
     }
+    
     
     /*
     // MARK: - Navigation
@@ -52,7 +58,7 @@ extension PlayBicycleVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        viewModel.updateCurrentPosition(mapview: mapView, coordinate: (locations.last?.coordinate)!)
         //아래와 같이 하는게 위의 Code보다 안정적으로 위치를 표기함 (까딱까딱이지 않음)
-        mapView.userTrackingMode = .followWithHeading
+        mapView.userTrackingMode = .follow
         
     }
     
