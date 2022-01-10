@@ -21,6 +21,8 @@ class PlayBicycleVC: UIViewController {
     
     var viewModel: PlayBicycleVM = PlayBicycleVM()
     var locationManager = CLLocationManager()
+    var startPin: MKPointAnnotation?
+    var endPin: MKPointAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +34,21 @@ class PlayBicycleVC: UIViewController {
         viewModel.currentPosition(mapView)
     }
     
+    //Subscribe the start/end TextFld
+    
+    
     @IBAction func pressedStartBtn(_ sender: UIButton) {
         print("Start Button Pressed")
-        //Test Code
-        if startTxtFld.text != nil {
-            viewModel.getcoordinateFromAddress(startTxtFld.text!, mapview: mapView)
+        
+        mapView.userTrackingMode = .none
+        print("startPin: \(startPin)")
+        print("endPin: \(endPin)")
+        
+        if startPin != nil && endPin != nil {
+            viewModel.disStartEndPin(mapview: mapView, start: startPin!, end: endPin!)
         }
     }
+    
     
     
     /*
@@ -58,8 +68,8 @@ extension PlayBicycleVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        viewModel.updateCurrentPosition(mapview: mapView, coordinate: (locations.last?.coordinate)!)
         //아래와 같이 하는게 위의 Code보다 안정적으로 위치를 표기함 (까딱까딱이지 않음)
-        mapView.userTrackingMode = .follow
-        
+        //mapView.userTrackingMode = .follow
+
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -80,6 +90,27 @@ extension PlayBicycleVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
+        if textField == startTxtFld && startTxtFld.text != "" {
+            print("StartTxtFld")
+
+            let coordinate = viewModel.getcoordinateFromAddress(startTxtFld.text!, mapview: mapView)
+            let pin = viewModel.generateAnnotation(lat: coordinate.lat, lon: coordinate.lon)
+            startPin = pin
+            mapView.userTrackingMode = .none
+            //mapView.addAnnotation(pin)
+        }
+        
+        if textField == endTxtFld && endTxtFld.text != "" {
+            print("EndTxtFld")
+            let coordinate = viewModel.getcoordinateFromAddress(endTxtFld.text!, mapview: mapView)
+            let pin = viewModel.generateAnnotation(lat: coordinate.lat, lon: coordinate.lon)
+            endPin = pin
+            mapView.userTrackingMode = .none
+            //mapView.addAnnotation(pin)
+        }
+        
+        
         return true
     }
     

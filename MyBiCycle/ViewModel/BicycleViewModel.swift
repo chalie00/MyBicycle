@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import RxSwift
 
 class PlayBicycleVM {
     
@@ -31,7 +32,7 @@ class PlayBicycleVM {
     }
     
     //get the longtitude ans latitude from address String
-    func getcoordinateFromAddress(_ getAddress: String, mapview: MKMapView) {
+    func getcoordinateFromAddress(_ getAddress: String, mapview:MKMapView) -> (lat: CLLocationDegrees, lon: CLLocationDegrees) {
         var resultLatitude: CLLocationDegrees!
         var resultLongtitude: CLLocationDegrees!
         
@@ -46,26 +47,44 @@ class PlayBicycleVM {
                 print("longtitude: \(lon)")
                 resultLongtitude = lon
             }
-            
-            if (resultLatitude != nil && resultLongtitude != nil) {
-                let coordinate = CLLocationCoordinate2DMake(resultLatitude, resultLongtitude)
-                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-                let region = MKCoordinateRegion(center: coordinate, span: span)
-                mapview.region = region
-                
-                //Mark the location obtained from the address as a pin on the map
-                let pin = MKPointAnnotation()
-                pin.title = "\(getAddress)"
-                pin.subtitle = "SubTitle"
-                pin.coordinate = coordinate
-                mapview.addAnnotation(pin)
-                
-            }
-            
-            
         }
+//        let coordinate = CLLocationCoordinate2DMake(resultLatitude!, resultLongtitude!)
+//        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+//        let region = MKCoordinateRegion(center: coordinate, span: span)
+//        mapview.region = region
+//        let pin = generateAnnotation(lat: resultLatitude!, lon: resultLongtitude!)
+//        mapview.addAnnotation(pin)
+        
+        return (lat: resultLatitude, lon: resultLongtitude)
     }
     
+    func generateAnnotation(lat: CLLocationDegrees, lon: CLLocationDegrees) -> MKPointAnnotation {
+        let coordinate = CLLocationCoordinate2DMake(lat, lon)
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        
+        return pin
+    }
+    
+    
+    func disStartEndPin(mapview: MKMapView, start: MKPointAnnotation, end: MKPointAnnotation) {
+        print("DisPlay")
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let centerLat = (start.coordinate.latitude + end.coordinate.latitude) / 2
+        let centerLon = (start.coordinate.longitude + end.coordinate.longitude) / 2
+        let coordinate = CLLocationCoordinate2DMake(centerLat, centerLon)
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        mapview.region = region
+        print(start)
+        print(end)
+        
+        //            pin.title = "\(getAddress)"
+        //            pin.subtitle = "SubTitle"
+        mapview.addAnnotation(start)
+        //mapview.addAnnotation(end)
+        //mapview.addAnnotations([start,end])
+        
+    }
     
     
 }//End Of The Class
