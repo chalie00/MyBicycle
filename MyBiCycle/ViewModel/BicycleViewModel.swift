@@ -98,14 +98,17 @@ class PlayBicycleVM {
                 }
                 return
             }
-            DispatchQueue.main.async {
-                let route = directionResponse.routes[0]
-                self.polyLine = route.polyline
-                mapview.addOverlay(self.polyLine)
-
-                let rect = route.polyline.boundingMapRect
-                mapview.setRegion(MKCoordinateRegion(rect), animated: true)
+            let route = directionResponse.routes[0]
+            print("Route:\(route)")
+            if (self.polyLine != nil) {
+                mapview.removeOverlay(self.polyLine)
             }
+            self.polyLine = route.polyline
+            mapview.addOverlay(self.polyLine)
+            
+            let rect = route.polyline.boundingMapRect
+            mapview.setRegion(MKCoordinateRegion(rect), animated: true)
+            print("PolyLine OK")
         }
     }
     

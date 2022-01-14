@@ -34,6 +34,7 @@ class PlayBicycleVC: UIViewController {
         locationManager.delegate = self
         startTxtFld.delegate = self
         endTxtFld.delegate = self
+        mapView.delegate = self
         
         //Display the user position after load the viewcontroller
         viewModel.currentPosition(mapView)
@@ -104,18 +105,11 @@ extension PlayBicycleVC: CLLocationManagerDelegate {
 
 extension PlayBicycleVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let myPolyLineRendere: MKPolylineRenderer = MKPolylineRenderer(overlay: overlay)
-
-          if ("route" == overlay.subtitle) {
-              myPolyLineRendere.lineWidth = 6
-              myPolyLineRendere.strokeColor = UIColor.green
-          }
-          else {
-              myPolyLineRendere.lineWidth = 5
-              myPolyLineRendere.strokeColor = UIColor.blue
-          }
-
-          return myPolyLineRendere
+        let myPolyLineRenderer: MKPolylineRenderer = MKPolylineRenderer(overlay: overlay)
+        myPolyLineRenderer.strokeColor = UIColor.red.withAlphaComponent(0.5)
+        myPolyLineRenderer.lineWidth = 7
+        print("Render OK")
+        return myPolyLineRenderer
     }
 }
 
@@ -175,13 +169,13 @@ extension PlayBicycleVC: UITextFieldDelegate {
         if textField == startTxtFld {
             startTxtFld.text = ""
             if self.startPin != nil {
-                mapView.removeAnnotation(startPin as! MKAnnotation)
+                mapView.removeAnnotation(startPin!)
             }
         }
         if textField == endTxtFld {
             endTxtFld.text = ""
             if endPin != nil {
-                mapView.removeAnnotation(endPin as! MKAnnotation)
+                mapView.removeAnnotation(endPin!)
             }
         }
     }

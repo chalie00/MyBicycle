@@ -48,6 +48,8 @@ RxSwift + MVVM을 공부함과 동시에 건강을 챙기기 위해 나를 위�
      ### 1) StartTextField에서 지명 입력 후 Enter -> 해당하는 지명에 Annotation Pin 표시 (EndTextField 동일)</br>
      ### 2) Start/End에 대한 Annotation Pin 설정 후 하단의 Start Button 선택 시 Start/End Pin이 Mapview에 표기됨</br>
      #### <span style="color:lightgreen">[UserSession] maps short session requested but session sharing is not enabled 가 발생하며, 경로가 그려지지 않음</span>
+     #### StackOverflow에 최근 동일 질문이 있으나 해결책 없음 https://stackoverflow.com/questions/70472607/ios-maps-issue-routes-not-showing
+     #### <span style="color:red">아... Delegate가 Call되지 않아 확인하니 mapview Delegate를 설정하지 않았음</span>
      ### 3) 경로에 대한 설정 중 자전거에 대한 항목이 없음
      ```
      directionRequest.transportType = .walking
