@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import RxSwift
+import RxCocoa
 
 class PlayBicycleVC: UIViewController {
 
@@ -23,6 +24,10 @@ class PlayBicycleVC: UIViewController {
     var locationManager = CLLocationManager()
     var startPin: MKPointAnnotation?
     var endPin: MKPointAnnotation?
+    var startLocation2D: CLLocationCoordinate2D?
+    var endLocation2D: CLLocationCoordinate2D?
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,7 @@ class PlayBicycleVC: UIViewController {
         
         //Display the user position after load the viewcontroller
         viewModel.currentPosition(mapView)
+        validTxtFld(textField: startTxtFld)
     }
     
     //Subscribe the start/end TextFld
@@ -39,14 +45,25 @@ class PlayBicycleVC: UIViewController {
     
     @IBAction func pressedStartBtn(_ sender: UIButton) {
         print("Start Button Pressed")
-        
         mapView.userTrackingMode = .none
-        print("startPin: \(startPin)")
-        print("endPin: \(endPin)")
-        
-        if startPin != nil && endPin != nil {
-            viewModel.disStartEndPin(mapview: mapView, start: startPin!, end: endPin!)
+        if (startLocation2D != nil) && (endLocation2D != nil) {
+//            viewModel.disStartEndPin(mapview: mapView, start: startPin!, end: endPin!)
+            viewModel.drawTheRoute(mapview: mapView, start: startLocation2D!, end: endLocation2D!)
         }
+    }
+    
+    func validTxtFld(textField: UITextField) {
+        textField.rx.text.subscribe(onNext: {
+            _ in
+            print("TextFld Changed")
+            if (self.startTxtFld != nil) && (self.endTxtFld != nil) {
+                if (self.startLocation2D != nil) && (self.endLocation2D != nil) {
+                    self.viewModel.drawTheRoute(mapview: self.mapView, start: self.startLocation2D!, end: self.endLocation2D!)
+                }
+            } else {
+                return
+            }
+        }).disposed(by: disposeBag)
     }
     
     
@@ -83,7 +100,23 @@ extension PlayBicycleVC: CLLocationManagerDelegate {
             break
         }
     }
-    
+}
+
+extension PlayBicycleVC: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let myPolyLineRendere: MKPolylineRenderer = MKPolylineRenderer(overlay: overlay)
+
+          if ("route" == overlay.subtitle) {
+              myPolyLineRendere.lineWidth = 6
+              myPolyLineRendere.strokeColor = UIColor.green
+          }
+          else {
+              myPolyLineRendere.lineWidth = 5
+              myPolyLineRendere.strokeColor = UIColor.blue
+          }
+
+          return myPolyLineRendere
+    }
 }
 
 extension PlayBicycleVC: UITextFieldDelegate {
@@ -91,26 +124,43 @@ extension PlayBicycleVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
+        //Move to Start Pin when startTextfield was typed
         if textField == startTxtFld && startTxtFld.text != "" {
-            print("StartTxtFld")
-
-            let coordinate = viewModel.getcoordinateFromAddress(startTxtFld.text!, mapview: mapView)
-            let pin = viewModel.generateAnnotation(lat: coordinate.lat, lon: coordinate.lon)
-            startPin = pin
-            mapView.userTrackingMode = .none
-            //mapView.addAnnotation(pin)
+            viewModel.getcoordinateFromAddress(startTxtFld.text!, mapview: mapView) {
+                success in
+                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                let coordinate = CLLocationCoordinate2DMake(self.viewModel.resultLatitude!, self.viewModel.resultLongtitude!)
+                self.startLocation2D = coordinate
+                let region = MKCoordinateRegion(center: coordinate, span: span)
+                self.viewModel.generateAnnotation(pinStr: "start", lat: self.viewModel.resultLatitude!, lon: self.viewModel.resultLongtitude!) {
+                    success in
+                    self.startPin = self.viewModel.startPin
+                    self.mapView.userTrackingMode = .none
+                    self.mapView.region = region
+                    self.startPin?.coordinate = coordinate
+                    self.mapView.addAnnotation(self.startPin!)
+                }
+            }
         }
         
+        //Move to End Pin when endTextfield was typed
         if textField == endTxtFld && endTxtFld.text != "" {
-            print("EndTxtFld")
-            let coordinate = viewModel.getcoordinateFromAddress(endTxtFld.text!, mapview: mapView)
-            let pin = viewModel.generateAnnotation(lat: coordinate.lat, lon: coordinate.lon)
-            endPin = pin
-            mapView.userTrackingMode = .none
-            //mapView.addAnnotation(pin)
+            viewModel.getcoordinateFromAddress(endTxtFld.text!, mapview: mapView) {
+                success in
+                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                let coordinate = CLLocationCoordinate2DMake(self.viewModel.resultLatitude!, self.viewModel.resultLongtitude!)
+                self.endLocation2D = coordinate
+                let region = MKCoordinateRegion(center: coordinate, span: span)
+                self.viewModel.generateAnnotation(pinStr: "end", lat: self.viewModel.resultLatitude!, lon: self.viewModel.resultLongtitude!) {
+                    success in
+                    self.endPin = self.viewModel.endPin
+                    self.mapView.userTrackingMode = .none
+                    self.mapView.region = region
+                    self.endPin?.coordinate = coordinate
+                    self.mapView.addAnnotation(self.endPin!)
+                }
+            }
         }
-        
-        
         return true
     }
     
@@ -121,4 +171,18 @@ extension PlayBicycleVC: UITextFieldDelegate {
         }
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == startTxtFld {
+            startTxtFld.text = ""
+            if self.startPin != nil {
+                mapView.removeAnnotation(startPin as! MKAnnotation)
+            }
+        }
+        if textField == endTxtFld {
+            endTxtFld.text = ""
+            if endPin != nil {
+                mapView.removeAnnotation(endPin as! MKAnnotation)
+            }
+        }
+    }
 }

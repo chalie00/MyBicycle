@@ -11,6 +11,14 @@ import RxSwift
 
 class PlayBicycleVM {
     
+    typealias completionHandler = (_ Success: Bool) -> ()
+    
+    var resultLatitude: CLLocationDegrees?
+    var resultLongtitude: CLLocationDegrees?
+    var startPin: MKPointAnnotation?
+    var endPin: MKPointAnnotation?
+    var polyLine: MKPolyline!
+    
     //Current Position
     func currentPosition(_ mapview: MKMapView) {
         print("complete load the user position")
@@ -32,59 +40,81 @@ class PlayBicycleVM {
     }
     
     //get the longtitude ans latitude from address String
-    func getcoordinateFromAddress(_ getAddress: String, mapview:MKMapView) -> (lat: CLLocationDegrees, lon: CLLocationDegrees) {
-        var resultLatitude: CLLocationDegrees!
-        var resultLongtitude: CLLocationDegrees!
-        
+    func getcoordinateFromAddress(_ getAddress: String, mapview:MKMapView, completionHandler: @escaping completionHandler){
         CLGeocoder().geocodeAddressString(getAddress) {
             placeMarks, error in
             if let lat = placeMarks?.first?.location?.coordinate.latitude {
-                print("lattitude: \(lat)")
-                resultLatitude = lat
+                self.resultLatitude = lat
             }
             
             if let lon = placeMarks?.first?.location?.coordinate.longitude {
-                print("longtitude: \(lon)")
-                resultLongtitude = lon
+                self.resultLongtitude = lon
+            }
+            if (self.resultLatitude != nil) && (self.resultLongtitude != nil) {
+                completionHandler(true)
             }
         }
-//        let coordinate = CLLocationCoordinate2DMake(resultLatitude!, resultLongtitude!)
-//        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-//        let region = MKCoordinateRegion(center: coordinate, span: span)
-//        mapview.region = region
-//        let pin = generateAnnotation(lat: resultLatitude!, lon: resultLongtitude!)
-//        mapview.addAnnotation(pin)
-        
-        return (lat: resultLatitude, lon: resultLongtitude)
     }
     
-    func generateAnnotation(lat: CLLocationDegrees, lon: CLLocationDegrees) -> MKPointAnnotation {
-        let coordinate = CLLocationCoordinate2DMake(lat, lon)
+    func generateAnnotation(pinStr: String, lat: CLLocationDegrees, lon: CLLocationDegrees, completionHandler: @escaping completionHandler) {
         let pin = MKPointAnnotation()
-        pin.coordinate = coordinate
         
-        return pin
+        if pinStr == "start" {
+            startPin = pin
+            completionHandler(true)
+        }
+        if pinStr == "end" {
+            endPin = pin
+            completionHandler(true)
+        }
     }
-    
     
     func disStartEndPin(mapview: MKMapView, start: MKPointAnnotation, end: MKPointAnnotation) {
-        print("DisPlay")
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         let centerLat = (start.coordinate.latitude + end.coordinate.latitude) / 2
         let centerLon = (start.coordinate.longitude + end.coordinate.longitude) / 2
         let coordinate = CLLocationCoordinate2DMake(centerLat, centerLon)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapview.region = region
-        print(start)
-        print(end)
-        
-        //            pin.title = "\(getAddress)"
-        //            pin.subtitle = "SubTitle"
         mapview.addAnnotation(start)
-        //mapview.addAnnotation(end)
-        //mapview.addAnnotations([start,end])
-        
     }
+    
+    //Draw the Route
+    func drawTheRoute(mapview: MKMapView, start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) {
+        let sourcePlaceMark = MKPlacemark(coordinate: start)
+        let destinationPlaceMark = MKPlacemark(coordinate: end)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
+        directionRequest.destination = MKMapItem(placemark: destinationPlaceMark)
+        
+        directionRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate {
+            response, error in
+            guard let directionResponse = response else {
+                if let error = error {
+                    print("Direction Error:\(error)")
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                let route = directionResponse.routes[0]
+                self.polyLine = route.polyline
+                mapview.addOverlay(self.polyLine)
+
+                let rect = route.polyline.boundingMapRect
+                mapview.setRegion(MKCoordinateRegion(rect), animated: true)
+            }
+//                let route = directionResponse.routes[0]
+//                polyline = route.polyline
+//                mapview.addOverlay(polyline)
+//
+//                let rect = route.polyline.boundingMapRect
+//                mapview.setRegion(MKCoordinateRegion(rect), animated: true)
+        }
+    }
+    
     
     
 }//End Of The Class
