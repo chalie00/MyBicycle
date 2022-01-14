@@ -106,12 +106,6 @@ class PlayBicycleVM {
                 let rect = route.polyline.boundingMapRect
                 mapview.setRegion(MKCoordinateRegion(rect), animated: true)
             }
-//                let route = directionResponse.routes[0]
-//                polyline = route.polyline
-//                mapview.addOverlay(polyline)
-//
-//                let rect = route.polyline.boundingMapRect
-//                mapview.setRegion(MKCoordinateRegion(rect), animated: true)
         }
     }
     
