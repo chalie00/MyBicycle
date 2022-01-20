@@ -119,8 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				21FBD0052782F46B00CF59DA /* Model */,
-				21FBD0042782F45E00CF59DA /* View */,
 				21FBD0032782F45800CF59DA /* ViewModel */,
+				21FBD0042782F45E00CF59DA /* View */,
 				21F9DD4E277D4D8F00386763 /* AppDelegate.swift */,
 				21F9DD50277D4D8F00386763 /* SceneDelegate.swift */,
 				21F9DD57277D4D9100386763 /* Assets.xcassets */,
@@ -536,13 +536,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KRST987SET;
+				DEVELOPMENT_TEAM = QT5YS9GGYX;
 				INFOPLIST_FILE = MyBiCycle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = chalie.MyBiCycle3;
+				PRODUCT_BUNDLE_IDENTIFIER = chalie.MyBiCycle5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -556,13 +556,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KRST987SET;
+				DEVELOPMENT_TEAM = QT5YS9GGYX;
 				INFOPLIST_FILE = MyBiCycle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = chalie.MyBiCycle3;
+				PRODUCT_BUNDLE_IDENTIFIER = chalie.MyBiCycle5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
