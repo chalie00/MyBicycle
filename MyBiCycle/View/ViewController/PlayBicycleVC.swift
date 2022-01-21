@@ -31,9 +31,6 @@ class PlayBicycleVC: UIViewController {
     private lazy var viewModel = PlayBicycleVM()
     private let disposeBag = DisposeBag()
     
-    //Subscribe Flag
-    var subscribeOnOff: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //locationManager.delegate = self
@@ -47,31 +44,52 @@ class PlayBicycleVC: UIViewController {
         
         //allElementBind()
         
-        subscribeOnOff = false
     }
     
     //TextFld Bind to ViewModel
-    private func allElementBind() {
+    private func subscribeOn() {
+        print("Subscribe ON")
+        
+            startTxtFld.rx.text.orEmpty.asObservable()
+                .subscribe { [weak self] in
+                    guard let value = $0.element else {return}
+                    self?.viewModel.txtFldChanged(text: value, sort: "start")
+                }
+                .disposed(by: disposeBag)
+            
+            endTxtFld.rx.text.orEmpty.asObservable()
+                .subscribe { [weak self] in
+                    guard let value = $0.element else {return}
+                    self?.viewModel.txtFldChanged(text: value, sort: "end")
+                }
+                .disposed(by: disposeBag)
+            
+            viewModel.annotationObs.asObservable()
+                .subscribe { [weak self] in
+                    self?.startPin = $0.element
+                    self!.mapView.addAnnotation(self!.startPin!)
+                }
+                .disposed(by: disposeBag)
+    }
+    
+    private func subscribeOff() {
+        print("Subscribe OFF")
+        let refreshDisposeBag = DisposeBag()
+        
         startTxtFld.rx.text.orEmpty.asObservable()
-            .subscribe { [weak self] in
-                guard let value = $0.element else {return}
-                self?.viewModel.txtFldChanged(text: value, sort: "start")
+            .subscribe {
+                [weak self] in
+                print("StartField Empty")
+                self?.viewModel.txtFldChanged(text: "", sort: "start")
             }
-            .disposed(by: disposeBag)
-        
+            .disposed(by: refreshDisposeBag)
         endTxtFld.rx.text.orEmpty.asObservable()
-            .subscribe { [weak self] in
-                guard let value = $0.element else {return}
-                self?.viewModel.txtFldChanged(text: value, sort: "end")
+            .subscribe {
+                [weak self] in
+                print("EndField Empry")
+                self?.viewModel.txtFldChanged(text: "", sort: "end")
             }
-            .disposed(by: disposeBag)
-        
-        viewModel.annotationObs.asObservable()
-            .subscribe { [weak self] in
-                self?.startPin = $0.element
-                self!.mapView.addAnnotation(self!.startPin!)
-            }
-            .disposed(by: disposeBag)
+            .disposed(by: refreshDisposeBag)
     }
     
     
@@ -139,12 +157,8 @@ extension PlayBicycleVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.subscribeOnOff = true
-        if subscribeOnOff {
-            allElementBind()
-            self.subscribeOnOff = false
-        }
         
+        subscribeOn()
         //Move to Start Pin when startTextfield was typed
 //        if textField == startTxtFld && startTxtFld.text != "" {
 //            viewModel.getcoordinateFromAddress(startTxtFld.text!, mapview: mapView) {
@@ -182,7 +196,7 @@ extension PlayBicycleVC: UITextFieldDelegate {
 //                }
 //            }
 //        }
-        
+        subscribeOff()
         return true
     }
     
@@ -193,7 +207,7 @@ extension PlayBicycleVC: UITextFieldDelegate {
         }
     }
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
 //        if textField == startTxtFld {
 //            startTxtFld.text = ""
 //            if self.startPin != nil {
@@ -207,5 +221,5 @@ extension PlayBicycleVC: UITextFieldDelegate {
 //                mapView.removeAnnotation(endPin!)
 //            }
 //        }
-//    }
+    }
 }
